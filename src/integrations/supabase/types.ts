@@ -14,7 +14,194 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      custom_programs: {
+        Row: {
+          allowed_foods: string[] | null
+          created_at: string
+          description: string | null
+          forbidden_foods: string[] | null
+          id: string
+          name: string
+          nutrient_targets: Json | null
+          program_type: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          allowed_foods?: string[] | null
+          created_at?: string
+          description?: string | null
+          forbidden_foods?: string[] | null
+          id?: string
+          name: string
+          nutrient_targets?: Json | null
+          program_type: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          allowed_foods?: string[] | null
+          created_at?: string
+          description?: string | null
+          forbidden_foods?: string[] | null
+          id?: string
+          name?: string
+          nutrient_targets?: Json | null
+          program_type?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      grocery_lists: {
+        Row: {
+          created_at: string
+          id: string
+          items: Json
+          meal_plan_id: string | null
+          name: string
+          store_comparison: Json | null
+          total_estimated_cost: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          items: Json
+          meal_plan_id?: string | null
+          name: string
+          store_comparison?: Json | null
+          total_estimated_cost?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          items?: Json
+          meal_plan_id?: string | null
+          name?: string
+          store_comparison?: Json | null
+          total_estimated_cost?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "grocery_lists_meal_plan_id_fkey"
+            columns: ["meal_plan_id"]
+            isOneToOne: false
+            referencedRelation: "meal_plans"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      meal_plans: {
+        Row: {
+          created_at: string
+          end_date: string
+          id: string
+          meals: Json
+          name: string
+          start_date: string
+          total_cost: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          end_date: string
+          id?: string
+          meals: Json
+          name: string
+          start_date: string
+          total_cost?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          end_date?: string
+          id?: string
+          meals?: Json
+          name?: string
+          start_date?: string
+          total_cost?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      medical_constraints: {
+        Row: {
+          constraint_type: string
+          constraint_value: string
+          created_at: string
+          id: string
+          notes: string | null
+          severity: string | null
+          user_id: string
+        }
+        Insert: {
+          constraint_type: string
+          constraint_value: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          severity?: string | null
+          user_id: string
+        }
+        Update: {
+          constraint_type?: string
+          constraint_value?: string
+          created_at?: string
+          id?: string
+          notes?: string | null
+          severity?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          activity_level: string | null
+          age: number | null
+          created_at: string
+          first_name: string | null
+          height: number | null
+          id: string
+          last_name: string | null
+          updated_at: string
+          user_id: string
+          weight: number | null
+        }
+        Insert: {
+          activity_level?: string | null
+          age?: number | null
+          created_at?: string
+          first_name?: string | null
+          height?: number | null
+          id?: string
+          last_name?: string | null
+          updated_at?: string
+          user_id: string
+          weight?: number | null
+        }
+        Update: {
+          activity_level?: string | null
+          age?: number | null
+          created_at?: string
+          first_name?: string | null
+          height?: number | null
+          id?: string
+          last_name?: string | null
+          updated_at?: string
+          user_id?: string
+          weight?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
