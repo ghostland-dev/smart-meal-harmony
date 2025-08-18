@@ -63,6 +63,20 @@ export const MealPlanViewer: React.FC<MealPlanViewerProps> = ({
     }, 0);
   };
 
+  const getTotalMealsCount = (): number => {
+    if (!plan.meals) return 0;
+    return Object.values(plan.meals as Record<string, any>).reduce((total: number, dayMeals: any) => {
+      return total + Object.keys(dayMeals || {}).length;
+    }, 0);
+  };
+
+  const getTotalCaloriesForPlan = (): number => {
+    if (!plan.meals) return 0;
+    return Object.values(plan.meals as Record<string, any>).reduce((total: number, dayMeals: any) => {
+      return total + getTotalCalories(dayMeals);
+    }, 0);
+  };
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -166,18 +180,14 @@ export const MealPlanViewer: React.FC<MealPlanViewerProps> = ({
             
             <div className="p-4 rounded-lg bg-secondary/10">
               <div className="text-2xl font-bold text-secondary">
-                {Object.values(plan.meals || {} as Record<string, any>).reduce((total: number, dayMeals: any) => {
-                  return total + Object.keys(dayMeals || {}).length;
-                }, 0)}
+                {getTotalMealsCount()}
               </div>
               <div className="text-sm text-muted-foreground">Repas</div>
             </div>
             
             <div className="p-4 rounded-lg bg-accent/10">
               <div className="text-2xl font-bold text-accent">
-                {Object.values(plan.meals || {} as Record<string, any>).reduce((total: number, dayMeals: any) => {
-                  return total + getTotalCalories(dayMeals);
-                }, 0)}
+                {getTotalCaloriesForPlan()}
               </div>
               <div className="text-sm text-muted-foreground">Calories totales</div>
             </div>
